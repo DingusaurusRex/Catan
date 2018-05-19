@@ -28,8 +28,16 @@ public class Edge {
         return this;
     }
 
+    public int getId() {
+        return this.id;
+    }
+
     public boolean hasRoad() {
         return this.hasRoad;
+    }
+
+    public int getPlayerNum() {
+        return this.playerNum;
     }
 
     public void placeRoad(int playerNum) {

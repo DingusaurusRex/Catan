@@ -4,6 +4,10 @@ import java.util.Set;
 
 public class Node {
 
+    public static final int EMPTY_NODE = 0;
+    public static final int SETTLEMENT_NODE = 1;
+    public static final int CITY_NODE = 2;
+
     // Edges on this Node
     private Set<Edge> edges;
 
@@ -31,6 +35,22 @@ public class Node {
     public Node withTile(Tile tile) {
         tiles.add(tile);
         return this;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public int getSettlementType() {
+        return this.settlementType;
+    }
+
+    public int getPlayerNum() {
+        return this.playerNum;
+    }
+
+    public boolean hasSettlement() {
+        return this.settlementType == EMPTY_NODE;
     }
 
     public void placeSettlement(int settlementType, int playerNum) {

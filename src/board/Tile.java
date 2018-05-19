@@ -32,6 +32,18 @@ public class Tile {
         this.number = number;
     }
 
+    public String getResource() {
+        return this.resource;
+    }
+
+    public int getNumber() {
+        return this.number;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
     public void setRobber(boolean hasRobber) {
         this.hasRobber = hasRobber;
     }
