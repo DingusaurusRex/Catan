@@ -4,6 +4,13 @@ import java.util.Set;
 
 public class Tile {
 
+    public static final String DESERT_TILE = "DESERT";
+    public static final String SHEEP_TILE = "SHEEP";
+    public static final String WHEAT_TILE = "WHEAT";
+    public static final String WOOD_TILE = "WOOD";
+    public static final String STONE_TILE = "STONE";
+    public static final String BRICK_TILE = "BRICK";
+
     // List of nodes on this tile
     private Set<Node> nodes;
 
