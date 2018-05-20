@@ -125,22 +125,18 @@ public class Board {
                 if (j == Tile.TILE_NUM_SIDES - 3 && i == Tile.TILE_NUM_SIDES - 1) {
                     node = firstLayerNode.withTile(tile);
                     tile.addNode(node);
-
-                    Edge edge = factory.getEdge().withNode(previousTileNode).withNode(node);
-                    previousTileNode.addEdge(edge);
-                    node.addEdge(edge);
-                    edges.add(edge);
                 } else {
                     node = factory.getNode().withTile(tile);
                     tile.addNode(node);
                     currentLayerNodes.add(node);
                     nodes.add(node);
-
-                    Edge edge = factory.getEdge().withNode(previousTileNode).withNode(node);
-                    previousTileNode.addEdge(edge);
-                    node.addEdge(edge);
-                    edges.add(edge);
                 }
+
+                // Add edge
+                Edge edge = factory.getEdge().withNode(previousTileNode).withNode(node);
+                previousTileNode.addEdge(edge);
+                node.addEdge(edge);
+                edges.add(edge);
 
                 previousTileNode = node;
             }

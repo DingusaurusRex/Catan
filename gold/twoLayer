@@ -1,4 +1,4 @@
-# Expected output for a board with two layers
+# Expected output for a board with two layers.  Note that tile resource / number will be different
 
 Nodes:
 [Node: (id: 0, settlementType: 0, playerNum: 0, edgeIds: [0 5 6 ], tileIds: [1 0 6 ])]
