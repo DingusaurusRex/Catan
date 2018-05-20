@@ -1,5 +1,6 @@
 package board;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Node {
@@ -24,17 +25,21 @@ public class Node {
     private final int id;
 
     public Node(int id) {
-        this.id = id;
-    }
+        edges = new HashSet<>();
+        tiles = new HashSet<>();
 
-    public Node withEdge(Edge edge) {
-        edges.add(edge);
-        return this;
+        this.id = id;
+        this.settlementType = EMPTY_NODE;
+        this.playerNum = 0;
     }
 
     public Node withTile(Tile tile) {
         tiles.add(tile);
         return this;
+    }
+
+    public void addEdge(Edge edge) {
+        edges.add(edge);
     }
 
     public int getId() {
@@ -56,5 +61,22 @@ public class Node {
     public void placeSettlement(int settlementType, int playerNum) {
         this.settlementType = settlementType;
         this.playerNum = playerNum;
+    }
+
+    public String toString() {
+        String result = "[Node: (";
+        result += "id: "+ id + ", ";
+        result += "settlementType: " + settlementType + ", ";
+        result += "playerNum: " + playerNum + ", ";
+        result += "edgeIds: [";
+        for (Edge edge : edges) {
+            result += edge.getId() + " ";
+        }
+        result += "], tileIds: [";
+        for (Tile tile : tiles) {
+            result += tile.getId() + " ";
+        }
+        result += "])]";
+        return result;
     }
 }

@@ -1,5 +1,6 @@
 package board;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Tile {
@@ -10,6 +11,8 @@ public class Tile {
     public static final String WOOD_TILE = "WOOD";
     public static final String STONE_TILE = "STONE";
     public static final String BRICK_TILE = "BRICK";
+
+    public static final int TILE_NUM_SIDES = 6;
 
     // List of nodes on this tile
     private Set<Node> nodes;
@@ -27,9 +30,16 @@ public class Tile {
     private final int id;
 
     public Tile(int id, String resource, int number) {
+        this.nodes = new HashSet<>();
+
         this.id = id;
         this. resource = resource;
         this.number = number;
+        this.hasRobber = resource.equals(DESERT_TILE);
+    }
+
+    public void addNode(Node node) {
+        nodes.add(node);
     }
 
     public String getResource() {
@@ -46,5 +56,18 @@ public class Tile {
 
     public void setRobber(boolean hasRobber) {
         this.hasRobber = hasRobber;
+    }
+
+    public String toString() {
+        String result = "[Tile: (";
+        result += "id: " + id + ", ";
+        result += "resource: " + resource + ", ";
+        result += "number: " + number + ", ";
+        result += "nodeIds: [";
+        for (Node node : nodes) {
+            result += node.getId() + " ";
+        }
+        result += "])]";
+        return result;
     }
 }

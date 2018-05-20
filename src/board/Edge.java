@@ -1,5 +1,6 @@
 package board;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -20,7 +21,11 @@ public class Edge {
     private final int id;
 
     public Edge(int id) {
+        nodes = new HashSet<>();
+
         this.id = id;
+        this.hasRoad = false;
+        this.playerNum = 0;
     }
 
     public Edge withNode(Node node) {
@@ -43,5 +48,19 @@ public class Edge {
     public void placeRoad(int playerNum) {
         hasRoad = true;
         this.playerNum = playerNum;
+    }
+
+    public String toString() {
+        String result = "[Edge: (";
+        result += "id: " + id + ", ";
+        result += "hasRoad: " + hasRoad + ", ";
+        result += "playerNum: " + playerNum + ", ";
+        result += "nodeIds: [";
+        for (Node node : nodes) {
+            result += node.getId() + " ";
+        }
+        result += "])]";
+
+        return result;
     }
 }
