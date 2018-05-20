@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f955fa7-04d8-42bb-9ed4-2af2cf721ec4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/gold/twoLayer" beforeDir="false" afterPath="$PROJECT_DIR$/gold/twoLayer" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/board/Board.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,23 +18,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Board.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/board/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="120" column="41" lean-forward="true" selection-start-line="120" selection-start-column="41" selection-end-line="120" selection-end-column="41" />
+            <state relative-caret-position="578">
+              <caret line="144" column="56" selection-start-line="144" selection-start-column="56" selection-end-line="144" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="twoLayer" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gold/twoLayer">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="98" selection-start-column="98" selection-end-column="98" />
             </state>
           </provider>
         </entry>
@@ -66,8 +57,8 @@
         <option value="$PROJECT_DIR$/src/board/Edge.java" />
         <option value="$PROJECT_DIR$/src/board/Tile.java" />
         <option value="$PROJECT_DIR$/src/board/Node.java" />
-        <option value="$PROJECT_DIR$/src/board/Board.java" />
         <option value="$PROJECT_DIR$/gold/twoLayer" />
+        <option value="$PROJECT_DIR$/src/board/Board.java" />
       </list>
     </option>
   </component>
@@ -399,20 +390,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/board/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="120" column="41" lean-forward="true" selection-start-line="120" selection-start-column="41" selection-end-line="120" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gold/twoLayer">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="98" selection-start-column="98" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/board/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="144" column="56" selection-start-line="144" selection-start-column="56" selection-end-line="144" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

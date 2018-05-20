@@ -34,7 +34,7 @@ public class Board {
 
     private void generateBaseBoard() {
         List<Node> centerLayerNodes = generateCenterTile();
-        List<Node> secondLayerNodes = generateFirstLayer(centerLayerNodes);
+        List<Node> firstLayerNodes = generateLayer(1, centerLayerNodes);
     }
 
     private List<Node> generateCenterTile() {
@@ -71,24 +71,24 @@ public class Board {
         return centerLayerNodes;
     }
 
-    private List<Node> generateFirstLayer(List<Node> centerLayerNodes) {
+    private List<Node> generateLayer(int layerNumber, List<Node> previousLayerNodes) {
         List<Node> currentLayerNodes = new ArrayList<>();
 
         Node firstLayerNode = null;
         Node previousTileNode = null;
 
-        for (int i = 0; i < Tile.TILE_NUM_SIDES; i++) {
+        for (int i = 0; i < (Tile.TILE_NUM_SIDES * layerNumber); i++) {
             // Create the tile
             Tile tile = factory.getTile();
             tiles.add(tile);
 
             // Get the nodes from the previous layer
-            Node lowerPreviousLayerNode = centerLayerNodes.get(i).withTile(tile);
+            Node lowerPreviousLayerNode = previousLayerNodes.get(i).withTile(tile);
             Node upperPreviousLayerNode;
-            if (i == Tile.TILE_NUM_SIDES - 1) {
-                upperPreviousLayerNode = centerLayerNodes.get(0).withTile(tile);
+            if (i == (Tile.TILE_NUM_SIDES * layerNumber) - 1) {
+                upperPreviousLayerNode = previousLayerNodes.get(0).withTile(tile);
             } else {
-                upperPreviousLayerNode = centerLayerNodes.get(i + 1).withTile(tile);
+                upperPreviousLayerNode = previousLayerNodes.get(i + 1).withTile(tile);
             }
 
             // Add previous layer nodes to this tile
@@ -122,7 +122,7 @@ public class Board {
             for (int j = 1; j < Tile.TILE_NUM_SIDES - 2; j++) {
                 Node node;
                 // If this is the last tile and the last node to generate on that tile, use the first tile
-                if (j == Tile.TILE_NUM_SIDES - 3 && i == Tile.TILE_NUM_SIDES - 1) {
+                if (j == Tile.TILE_NUM_SIDES - 3 && i == (Tile.TILE_NUM_SIDES * layerNumber) - 1) {
                     node = firstLayerNode.withTile(tile);
                     tile.addNode(node);
                 } else {
@@ -142,7 +142,7 @@ public class Board {
             }
 
             // generate edge to inner layer for last outer layer node
-            if (i != Tile.TILE_NUM_SIDES - 1) {
+            if (i != (Tile.TILE_NUM_SIDES * layerNumber) - 1) {
                 Edge edge = factory.getEdge().withNode(previousTileNode).withNode(upperPreviousLayerNode);
                 previousTileNode.addEdge(edge);
                 upperPreviousLayerNode.addEdge(edge);
