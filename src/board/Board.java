@@ -72,15 +72,15 @@ public class Board {
         return centerLayerNodes;
     }
 
-    private List<Node> generateLayer(int layerNumber, List<Node> previousLayerNodes) {
+    private List<Node> generateLayer(int layerNumber, List<Node> innerLayerNodes) {
         List<Node> currentLayerNodes = new ArrayList<>();
 
-        Iterator<Node> nodeIterator = previousLayerNodes.iterator();
+        Iterator<Node> nodeIterator = innerLayerNodes.iterator();
 
-        Node firstCurrentLayerNode = null;
-        Node latestCurrentLayerNode = null;
-        Node firstPreviousLayerNode = null;
-        Node latestPreviousLayerNode = null;
+        Node firstOuterLayerNode = null;
+        Node previousOuterLayerNode = null;
+        Node firstInnerLayerNode = null;
+        Node latestInnerLayerNode = null;
 
         for (int i = 0; i < (Tile.TILE_NUM_SIDES * layerNumber); i++) {
             // Create the tile
@@ -88,56 +88,56 @@ public class Board {
             tiles.add(tile);
 
             // Get the nodes from the previous layer
-            Node lowerPreviousLayerNode;
-            if (firstPreviousLayerNode == null) {
-                lowerPreviousLayerNode = nodeIterator.next().withTile(tile);
-                firstPreviousLayerNode = lowerPreviousLayerNode;
+            Node lowerInnerLayerNode;
+            if (firstInnerLayerNode == null) {
+                lowerInnerLayerNode = nodeIterator.next().withTile(tile);
+                firstInnerLayerNode = lowerInnerLayerNode;
             } else {
-                lowerPreviousLayerNode = latestPreviousLayerNode.withTile(tile);
+                lowerInnerLayerNode = latestInnerLayerNode.withTile(tile);
             }
 
-            Node upperPreviousLayerNode;
+            Node upperInnerLayerNode;
             if (i == (Tile.TILE_NUM_SIDES * layerNumber) - 1) {
-                upperPreviousLayerNode = firstPreviousLayerNode.withTile(tile);
+                upperInnerLayerNode = firstInnerLayerNode.withTile(tile);
             } else {
-                upperPreviousLayerNode = nodeIterator.next().withTile(tile);
+                upperInnerLayerNode = nodeIterator.next().withTile(tile);
             }
 
-            latestPreviousLayerNode = upperPreviousLayerNode;
+            latestInnerLayerNode = upperInnerLayerNode;
 
-            // Add previous layer nodes to this tile
-            tile.addNode(lowerPreviousLayerNode);
-            tile.addNode(upperPreviousLayerNode);
+            // Add inner layer nodes to this tile
+            tile.addNode(lowerInnerLayerNode);
+            tile.addNode(upperInnerLayerNode);
 
             // Get the first tile node
             Node firstTileNode;
 
             // If this is the first node of this layer
-            if (firstCurrentLayerNode == null) {
+            if (firstOuterLayerNode == null) {
                 firstTileNode = factory.getNode().withTile(tile);
                 tile.addNode(firstTileNode);
                 currentLayerNodes.add(firstTileNode);
                 nodes.add(firstTileNode);
 
-                Edge edge = factory.getEdge().withNode(lowerPreviousLayerNode).withNode(firstTileNode);
-                lowerPreviousLayerNode.addEdge(edge);
+                Edge edge = factory.getEdge().withNode(lowerInnerLayerNode).withNode(firstTileNode);
+                lowerInnerLayerNode.addEdge(edge);
                 firstTileNode.addEdge(edge);
                 edges.add(edge);
 
-                firstCurrentLayerNode = firstTileNode;
+                firstOuterLayerNode = firstTileNode;
             } else {
-                firstTileNode = latestCurrentLayerNode.withTile(tile);
+                firstTileNode = previousOuterLayerNode.withTile(tile);
                 tile.addNode(firstTileNode);
             }
 
-            latestCurrentLayerNode = firstTileNode;
+            previousOuterLayerNode = firstTileNode;
 
             // Populate outer layer nodes
             for (int j = 1; j < Tile.TILE_NUM_SIDES - 2; j++) {
                 Node node;
                 // If this is the last tile and the last node to generate on that tile, use the node
                 if (j == Tile.TILE_NUM_SIDES - 3 && i == (Tile.TILE_NUM_SIDES * layerNumber) - 1) {
-                    node = firstCurrentLayerNode.withTile(tile);
+                    node = firstOuterLayerNode.withTile(tile);
                     tile.addNode(node);
                 } else {
                     node = factory.getNode().withTile(tile);
@@ -147,19 +147,19 @@ public class Board {
                 }
 
                 // Add edge
-                Edge edge = factory.getEdge().withNode(latestCurrentLayerNode).withNode(node);
-                latestCurrentLayerNode.addEdge(edge);
+                Edge edge = factory.getEdge().withNode(previousOuterLayerNode).withNode(node);
+                previousOuterLayerNode.addEdge(edge);
                 node.addEdge(edge);
                 edges.add(edge);
 
-                latestCurrentLayerNode = node;
+                previousOuterLayerNode = node;
             }
 
             // generate edge to inner layer for last outer layer node
             if (i != (Tile.TILE_NUM_SIDES * layerNumber) - 1) {
-                Edge edge = factory.getEdge().withNode(latestCurrentLayerNode).withNode(upperPreviousLayerNode);
-                latestCurrentLayerNode.addEdge(edge);
-                upperPreviousLayerNode.addEdge(edge);
+                Edge edge = factory.getEdge().withNode(previousOuterLayerNode).withNode(upperInnerLayerNode);
+                previousOuterLayerNode.addEdge(edge);
+                upperInnerLayerNode.addEdge(edge);
                 edges.add(edge);
             }
         }
