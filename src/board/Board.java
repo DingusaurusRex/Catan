@@ -78,56 +78,65 @@ public class Board {
 
         Iterator<Node> nodeIterator = innerLayerNodes.iterator();
 
-        Node firstOuterLayerNode = null;
-        Node previousOuterLayerNode = null;
-        Node firstInnerLayerNode = null;
-        Node latestInnerLayerNode = null;
+        Node firstOuterLayerNode = null;        // The first node in this layer
+        Node previousOuterLayerNode = null;     // The latest node in this layer
+        Node firstInnerLayerNode = null;        // The first node in the previous layer
+        Node previousInnerLayerNode = null;       // The latest node in the previous layer
 
         for (int i = 0; i < (Tile.TILE_NUM_SIDES * layerNumber); i++) {
             // Create the tile
             Tile tile = factory.getTile();
             tiles.add(tile);
 
+            // The number of inner layer nodes that this tile has
             int numInnerLayerNodes = 2;
 
-            // Get the nodes from the previous layer
+            // Get the nodes from the inner layer
+
+            // Get the "lower" node from the inner layer
             Node lowerInnerLayerNode;
+
+            // If this is the first inner layer node
             if (firstInnerLayerNode == null) {
                 if (layerNumber % 2 == 1) {
+                    // If odd layer, just grab the first node from inner layer
                     lowerInnerLayerNode = nodeIterator.next().withTile(tile);
                 } else {
+                    // if even layer, grab the last node from the inner layer
                     lowerInnerLayerNode = innerLayerNodes.get(innerLayerNodes.size() - 1).withTile(tile);
                 }
                 firstInnerLayerNode = lowerInnerLayerNode;
             } else {
-                lowerInnerLayerNode = latestInnerLayerNode.withTile(tile);
+                // Otherwise just grab the last inner layer node from the previous tile
+                lowerInnerLayerNode = previousInnerLayerNode.withTile(tile);
             }
             tile.addNode(lowerInnerLayerNode);
 
-            // Get the middle inner layer node, if needed
+            // Get the middle inner layer node, if odd layer
             if (layerNumber != 1 && i % 2 == 0) {
                 Node middleNode = nodeIterator.next().withTile(tile);
                 tile.addNode(middleNode);
-                numInnerLayerNodes++;
+                numInnerLayerNodes = 3;
             }
 
+            // Get the "upper" node from the inner layer
             Node upperInnerLayerNode;
             if (i == (Tile.TILE_NUM_SIDES * layerNumber) - 1) {
+                // If this is the last tile, grab the first inner layer node
                 upperInnerLayerNode = firstInnerLayerNode.withTile(tile);
             } else {
+                // Otherwise, just grab the next node
                 upperInnerLayerNode = nodeIterator.next().withTile(tile);
             }
 
-            latestInnerLayerNode = upperInnerLayerNode;
-
-            // Add inner layer nodes to this tile
+            previousInnerLayerNode = upperInnerLayerNode;
             tile.addNode(upperInnerLayerNode);
 
             // Get the first tile node
             Node firstTileNode;
 
-            // If this is the first node of this layer
             if (firstOuterLayerNode == null) {
+                // If this is the first node of this layer
                 firstTileNode = factory.getNode().withTile(tile);
                 tile.addNode(firstTileNode);
                 currentLayerNodes.add(firstTileNode);
@@ -140,6 +149,7 @@ public class Board {
 
                 firstOuterLayerNode = firstTileNode;
             } else {
+                // Else, grab the last node from the previous tile
                 firstTileNode = previousOuterLayerNode.withTile(tile);
                 tile.addNode(firstTileNode);
             }
@@ -149,7 +159,7 @@ public class Board {
             // Populate outer layer nodes
             for (int j = 1; j < Tile.TILE_NUM_SIDES - numInnerLayerNodes; j++) {
                 Node node;
-                // If this is the last tile and the last node to generate on that tile, use the node
+                // If this is the last tile and the last node to generate on that tile, use the first outer node
                 if (j == Tile.TILE_NUM_SIDES - 3 && i == (Tile.TILE_NUM_SIDES * layerNumber) - 1) {
                     node = firstOuterLayerNode.withTile(tile);
                     tile.addNode(node);

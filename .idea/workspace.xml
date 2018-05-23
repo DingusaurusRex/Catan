@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/board/Board.java" line="141" />
+    <bookmark url="file://$PROJECT_DIR$/src/board/Board.java" line="150" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f955fa7-04d8-42bb-9ed4-2af2cf721ec4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/gold/threeLayer" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gold/twoLayer" beforeDir="false" afterPath="$PROJECT_DIR$/gold/twoLayer" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/board/Board.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -20,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Board.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/board/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="631">
-              <caret line="104" column="46" lean-forward="true" selection-start-line="104" selection-start-column="46" selection-end-line="104" selection-end-column="46" />
+            <state relative-caret-position="376">
+              <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,7 +38,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="twoLayer" pinned="false" current-in-tab="true">
+      <file leaf-file-name="twoLayer" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gold/twoLayer">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -74,9 +71,9 @@
         <option value="$PROJECT_DIR$/src/board/Edge.java" />
         <option value="$PROJECT_DIR$/src/board/Tile.java" />
         <option value="$PROJECT_DIR$/src/board/Node.java" />
-        <option value="$PROJECT_DIR$/src/board/Board.java" />
         <option value="$PROJECT_DIR$/gold/threeLayer" />
         <option value="$PROJECT_DIR$/gold/twoLayer" />
+        <option value="$PROJECT_DIR$/src/board/Board.java" />
       </list>
     </option>
   </component>
@@ -568,16 +565,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/board/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="104" column="46" lean-forward="true" selection-start-line="104" selection-start-column="46" selection-end-line="104" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gold/threeLayer">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2533">
@@ -587,6 +574,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gold/twoLayer">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/board/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
