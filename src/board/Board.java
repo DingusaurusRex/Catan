@@ -36,6 +36,7 @@ public class Board {
     private void generateBaseBoard() {
         List<Node> centerLayerNodes = generateCenterTile();
         List<Node> firstLayerNodes = generateLayer(1, centerLayerNodes);
+        List<Node> secondLayerNodes = generateLayer(2, firstLayerNodes);
     }
 
     private List<Node> generateCenterTile() {
@@ -87,13 +88,27 @@ public class Board {
             Tile tile = factory.getTile();
             tiles.add(tile);
 
+            int numInnerLayerNodes = 2;
+
             // Get the nodes from the previous layer
             Node lowerInnerLayerNode;
             if (firstInnerLayerNode == null) {
-                lowerInnerLayerNode = nodeIterator.next().withTile(tile);
+                if (layerNumber % 2 == 1) {
+                    lowerInnerLayerNode = nodeIterator.next().withTile(tile);
+                } else {
+                    lowerInnerLayerNode = innerLayerNodes.get(innerLayerNodes.size() - 1).withTile(tile);
+                }
                 firstInnerLayerNode = lowerInnerLayerNode;
             } else {
                 lowerInnerLayerNode = latestInnerLayerNode.withTile(tile);
+            }
+            tile.addNode(lowerInnerLayerNode);
+
+            // Get the middle inner layer node, if needed
+            if (layerNumber != 1 && i % 2 == 0) {
+                Node middleNode = nodeIterator.next().withTile(tile);
+                tile.addNode(middleNode);
+                numInnerLayerNodes++;
             }
 
             Node upperInnerLayerNode;
@@ -106,7 +121,6 @@ public class Board {
             latestInnerLayerNode = upperInnerLayerNode;
 
             // Add inner layer nodes to this tile
-            tile.addNode(lowerInnerLayerNode);
             tile.addNode(upperInnerLayerNode);
 
             // Get the first tile node
@@ -133,7 +147,7 @@ public class Board {
             previousOuterLayerNode = firstTileNode;
 
             // Populate outer layer nodes
-            for (int j = 1; j < Tile.TILE_NUM_SIDES - 2; j++) {
+            for (int j = 1; j < Tile.TILE_NUM_SIDES - numInnerLayerNodes; j++) {
                 Node node;
                 // If this is the last tile and the last node to generate on that tile, use the node
                 if (j == Tile.TILE_NUM_SIDES - 3 && i == (Tile.TILE_NUM_SIDES * layerNumber) - 1) {
