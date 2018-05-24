@@ -88,9 +88,6 @@ public class Board {
             Tile tile = factory.getTile();
             tiles.add(tile);
 
-            // The number of inner layer nodes that this tile has
-            int numInnerLayerNodes = 2;
-
             // Get the nodes from the inner layer
 
             // Get the "lower" node from the inner layer
@@ -113,10 +110,10 @@ public class Board {
             tile.addNode(lowerInnerLayerNode);
 
             // Get the middle inner layer node, if odd layer
-            if (layerNumber != 1 && i % 2 == 0) {
+            // The number of inner layer nodes that this tile has
+            if (i % layerNumber != (layerNumber - 1)) {
                 Node middleNode = nodeIterator.next().withTile(tile);
                 tile.addNode(middleNode);
-                numInnerLayerNodes = 3;
             }
 
             // Get the "upper" node from the inner layer
@@ -157,7 +154,9 @@ public class Board {
             previousOuterLayerNode = firstTileNode;
 
             // Populate outer layer nodes
-            for (int j = 1; j < Tile.TILE_NUM_SIDES - numInnerLayerNodes; j++) {
+            int numOuterLayerNodes = (i % layerNumber != (layerNumber - 1)) ? Tile.TILE_NUM_SIDES - 3 : Tile.TILE_NUM_SIDES - 2;
+
+            for (int j = 1; j < numOuterLayerNodes; j++) {
                 Node node;
                 // If this is the last tile and the last node to generate on that tile, use the first outer node
                 if (j == Tile.TILE_NUM_SIDES - 3 && i == (Tile.TILE_NUM_SIDES * layerNumber) - 1) {
